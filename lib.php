@@ -18,7 +18,7 @@ class FileLib{
                 $this->filename = $filename;
                 if (!file_exists('confing.json')) throw new FileException(5);//Проверяем существует ли файл конфигурации
                 
-                $this->check_conging(); // Проверка конфигурации
+                $this->check_confing(); // Проверка конфигурации
                 $fp = fopen($filename, 'r');
                 if (!$fp) throw new FileException(2); //Проверяем открылся ли файл 
                 $this->file = $fp;
@@ -41,7 +41,7 @@ class FileLib{
                 //Сохраняем к нам на сервер
                 file_put_contents($new_filename, $file_content);
                 //Проверяем конфигурацию
-                $this->check_conging();
+                $this->check_confing();
                 //Теперь с ним можно работать как с локальным файлом
                 $this->file = fopen($new_filename, 'r');
         }
@@ -56,8 +56,8 @@ class FileLib{
             unlink($file);
         }
     }
-    
-    public function check_conging(){
+    //Проверка конфигурации
+    public function check_confing(){
         try {
             //Файл конфигурации храню в формате JSON
             $confing = self::get_file_confing('confing.json'); // Получаю массив конфигурации для файла
